@@ -13,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
@@ -21,43 +20,20 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
-
 public class UserController {
-
+/*
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/user/signIn")
+    @GetMapping()
     public String signIn(){
-      return "juegos/vista.html";
+       *//** Completar *//*
     }
 
-    @GetMapping("/user/signInRedirect")
+    @GetMapping()
     public String signInRedirect(Authentication auth, HttpSession session){
-        String rol = "";
-        for (GrantedAuthority role : auth.getAuthorities()) {
-            rol = role.getAuthority();
-            break;
-        }
-        System.out.println(rol);
+       *//** Completar *//*
 
-        String correo = auth.getName();
-        User usuario = userRepository.findUserByCorreo(correo);
-        session.setAttribute("usuario", usuario);
-
-
-        if (rol.equals("USER")) {
-            return "redirect:/juegos/lista";
-        } else {
-            if (rol.equals("ADMIN") ) {
-
-                return "redirect:/admin/usuarios";
-            }
-
-
-        }
-        return "redirect:/admin";
-
-    }
+    }*/
 
 }
