@@ -41,34 +41,20 @@ public class JuegosController {
         User usuario = (User) httpSession.getAttribute("usuario");
         String rol= usuario.getAutorizacion();
         System.out.println(rol);
-        switch (rol){
-            case "ADMIN":
-                System.out.println("ENTRO ADMIN");
-                model.addAttribute("listaJuegosAsc", juegosRepository.findAllByOrdOrderByPrecioAsc());
-                return "juegos/lista";
-            case "USER":
-                System.out.println("USER");
-                model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(usuario.getIdusuario()));
-                return "juegos/comprado";
 
-        }
-        return "juegos/lista";
-        /*
+
         if (rol.equalsIgnoreCase("ADMIN")) {
             System.out.println("ENTRO ADMIN");
             model.addAttribute("listaJuegosAsc", juegosRepository.findAllByOrdOrderByPrecioAsc());
             return "juegos/lista";
 
-        }else {
-
-            System.out.println("USER");
+        }else if(rol.equalsIgnoreCase("USER")){
+            System.out.println("ENTRO USER");
             model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(usuario.getIdusuario()));
             return "juegos/comprado";
         }
 
-         */
-
-
+        return "juegos/lista";
     }
 
     @GetMapping(value = {"", "/", "/vista"})
