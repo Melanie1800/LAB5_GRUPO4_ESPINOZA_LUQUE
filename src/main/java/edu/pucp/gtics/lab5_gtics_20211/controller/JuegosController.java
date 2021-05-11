@@ -48,11 +48,10 @@ public class JuegosController {
             return "juegos/lista";
 
         }else {
-            System.out.println("USER");
 
+            System.out.println("USER");
             model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(usuario.getIdusuario()));
             return "juegos/comprado";
-
         }
 
 
