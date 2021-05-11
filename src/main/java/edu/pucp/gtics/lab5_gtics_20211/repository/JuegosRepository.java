@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface JuegosRepository extends JpaRepository<Juegos,Integer> {
      /** Completar */
+     @Query()
+     List<Juegos> obtenerJuegosPorUser(Integer idusuario);
 }
