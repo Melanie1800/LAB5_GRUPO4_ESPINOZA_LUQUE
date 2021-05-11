@@ -19,7 +19,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         /** Completar */
-               
+        http.formLogin()
+                .loginPage("/user/signIn")
+                .loginProcessingUrl("/processLogin")
+                .usernameParameter("correo")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/redirectByRole",true);
+
+        http.logout();
     }
 
     @Autowired
@@ -29,7 +36,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         /** Completar */
-
+        auth.jdbcAuthentication()
+                .dataSource(datasource)
+                .passwordEncoder(new BCryptPasswordEncoder())
+                .usersByUsernameQuery("select correo, password, enabled FROM usuarios WHERE correo = ?")
+                .authoritiesByUsernameQuery("select u.correo, u.autorizacion from usuario u " +
+                        "where u.correo = ? and u.enabled = 1");
     }
 
 }
