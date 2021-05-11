@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='Juegos')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+            <div class="page-header text-center">
+                <h1>Lista de Juegos Comprados</h1>
+            </div>
+            <div class="container-fluid">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 card-app">
+                    <div class="col mb-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRec6M4WbTPy03DFswDEaaYYMB46DU7IJ962Q&amp;usqp=CAU" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">FIFA 21</h5>
+                                <p class="card-text">El juego es la 28.ª entrega de la serie de videojuegos de FIFA. Es el primer videojuego de la serie FIFA para PlayStation 5 y Xbox Series X|S.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col mb-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="https://media.vandal.net/m/15505/20121217145531_1.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">Resident Evil 6</h5>
+                                <p class="card-text">Es un videojuego de acción en tercera persona del género dramatic horror publicado el 2 de octubre de 2012 por la empresa Capcom.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Contenido -->
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Colocar # Grupo - PUCP @ 2021</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

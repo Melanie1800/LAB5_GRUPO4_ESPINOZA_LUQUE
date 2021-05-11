@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="header(option)">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/img/icon.png}" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+            GameShop3 [Lab 5]
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-app" aria-controls="navbar-app" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-star" id="navbar-app">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="...">Juegos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="...">Plataformas</a>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse justify-content-end" id="navbar-app">
+           <!-- <ul  class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" >Ingresar</a>
+                </li>
+            </ul> -->
+            <ul  class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-user"></i><span> (Enrique Larios)</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <form class="form-inline my-2 my-lg-0" method="post">
+                                <button type="submit" class="btn btn-link btn-sm nav-link" style="color: #c82333; border-left-width: 0px; padding-left: 0px;">Cerrar Sesión</button>
+                            </form>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

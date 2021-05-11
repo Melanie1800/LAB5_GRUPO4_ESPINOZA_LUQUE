@@ -1,0 +1,52 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='Plataformas')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+            <div class="page-header text-center">
+                <h1>Lista de Plataformas</h1>
+            </div>
+            <div class="container-fluid">
+
+                <a class="btn btn-primary mt-4 mb-4" th:href="@{/plataformas/nuevo}">Nueva Plataforma</a>
+                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="plataforma, info : ${listaplataformas}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td th:text="${plataforma.nombre}"></td>
+                        <td th:text="${plataforma.descripcion}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/plataformas/editar?id=' + ${plataforma.idplataforma}}">Editar</a></td>
+                        <td><a class="btn btn-danger" th:href="@{'/plataformas/borrar?id=' + ${plataforma.idplataforma}}">Borrar</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /Contenido -->
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Colocar # Grupo - PUCP @ 2021</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<div th:replace="fragments/base.html :: jsScripts"></div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='Juegos')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+        <div class="page-header text-center">
+            <h2 th:text="${juego.idjuego == 0? 'Nuevo Juego' : 'Editar Juego'}"></h2>
+        </div>
+        <div class="container-fluid">
+                <form method="POST">
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" value="Call of Duty : Black Ops II" >
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion">Es el segundo juego de la saga Call of Duty en presentar la futura tecnolog&iacute;a de la guerra, y el primero en presentar historias de ramificaci&oacute;n impulsados por elecci&oacute;n del jugador, as&iacute; como la selecci&oacute;n de armas antes de comenzar las misiones del modo historia.</textarea>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="plataforma.idplataforma">Plataforma</label>
+                        <select class="form-control custom-select" id="plataforma.idplataforma" name="plataforma.idplataforma" >
+                          <option value="-1">- Seleccione -</option>
+                          <option value="1" >Wii</option>
+                          <option value="2" >PlayStation 4</option>
+                          <option value="3"
+                              selected="selected" >Xbox 360</option>
+                          <option value="4" >Nintendo Switch</option>
+                          <option value="5" >PlayStation 5</option>
+                          <option value="10" >Xbox Serie X </option>
+                          <option value="17" >Nintendo Switch Lite</option>
+                        </select>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen URL</label>
+                        <input type="text" class="form-control" id="image" name="image" value="https://store-images.s-microsoft.com/image/apps.6920.64998372950229933.77155980-5b6a-4296-88e2-959fda591dee.9f5a56f8-8520-4a1e-aa4e-ab5b607e5fb1?mode=scale&amp;q=90&amp;h=225&amp;w=150" >
+                    </div>
+                    <div class="form-group">
+                        <label>Precio</label>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">S/</div>
+                            </div>
+                            <input type="text" class="form-control" id="precio" name="precio" value="70.0" >
+                        </div>
+                        
+                    </div>
+                    <input type="hidden" id="idjuego" name="idjuego" value="2" />
+                    <a href="/gameshop3/juegos/lista" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </form>
+        </div>
+        </main>
+    </div>
+            <!-- /Contenido -->
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Colocar # Grupo - PUCP @ 2021</div>
+                </div>
+            </div>
+        </footer>
+</div>
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

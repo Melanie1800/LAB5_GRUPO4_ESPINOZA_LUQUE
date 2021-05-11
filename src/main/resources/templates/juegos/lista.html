@@ -1,0 +1,70 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/base.html :: head(title='Gameshop3 - Bienvenido')"></head>
+<body>
+<div class='container container-app'>
+    <div th:replace="fragments/header.html :: header(option='Juegos')"></div>
+
+    <div id="content">
+        <main>
+            <!-- Contenido -->
+            <div class="page-header text-center">
+                <h1>Lista de Juegos para la Venta</h1>
+            </div>
+            <div class="container-fluid">
+
+                <a class="btn btn-primary mt-4 mb-4" >Nuevo Juego</a>
+                <div th:if="${msg != null}" th:text="${msg}" class="alert alert-success" role="alert"></div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th></th>
+                        <th style="width: 18%">Nombre</th>
+                        <th style="width: 32%">Descripción</th>
+                        <th style="width: 10%">Plataforma</th>
+                        <th style="width: 10%">Precio (S/)</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><img src="https://store-images.s-microsoft.com/image/apps.6920.64998372950229933.77155980-5b6a-4296-88e2-959fda591dee.9f5a56f8-8520-4a1e-aa4e-ab5b607e5fb1?mode=scale&amp;q=90&amp;h=225&amp;w=150" width="80" class="rounded" /></td>
+                            <td>Call of Duty : Black Ops II</td>
+                            <td>Es el segundo juego de la saga Call of Duty en presentar la futura tecnología de la guerra, y el primero en presentar historias de ramificación impulsados por elección del jugador, así como la selección de armas antes de comenzar las misiones del modo historia.</td>
+                            <td>Xbox 360</td>
+                            <td>70.0</td>
+                            <td><a class="btn btn-primary" href="/gameshop3/juegos/editar?id=2">Editar</a></td>
+                            <td><a class="btn btn-danger" href="/gameshop3/juegos/borrar?id=2">Borrar</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><img src="https://store-images.s-microsoft.com/image/apps.38337.69011092827716296.e9190db7-6f4c-478c-8555-3edad4336a39.c312dbb9-bd59-403b-9161-3d058274b782" width="80" class="rounded" /></td>
+                            <td>Assassin Creed 2</td>
+                            <td>Es una serie de videojuegos de acción-aventura histórica con tintes de ciencia ficción, ambientada en las Cruzadas.</td>
+                            <td>PlayStation 4</td>
+                            <td>100.0</td>
+                            <td><a class="btn btn-primary" href="/gameshop3/juegos/editar?id=3">Editar</a></td>
+                            <td><a class="btn btn-danger" href="/gameshop3/juegos/borrar?id=3">Borrar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- /Contenido -->
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Colocar # Grupo - PUCP @ 2021</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
