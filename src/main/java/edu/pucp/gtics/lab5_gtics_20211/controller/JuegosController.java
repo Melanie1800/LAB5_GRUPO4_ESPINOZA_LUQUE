@@ -21,40 +21,76 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-
+@RequestMapping("juegos")
 public class JuegosController {
 
+    @Autowired
+    JuegosRepository juegosRepository;
 
+    @Autowired
+    PlataformasRepository plataformasRepository;
 
-    @GetMapping( ... )
-    public String listaJuegos ( ... ){
-               /** Completar */
+    @GetMapping("/lista")
+    public String listaJuegos(Model model) {
+        /** Completar */
+        String rol = "admin";
+        if (rol.equalsIgnoreCase("user")) {
+            model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(1));
+            return "juegos/comprado";
+        }
+        model.addAttribute("listaJuegosAsc", juegosRepository.findAllByOrdOrderByPrecioAsc());
+        return "juegos/lista";
     }
 
     @GetMapping(value = {"", "/", "/vista"})
-    public String vistaJuegos ( ... ){
-               /** Completar */
-    }
+    public String vistaJuegos(Model model) {
 
-    @GetMapping( ... )
-    public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego){
-               /** Completar */
-    }
-
-    @GetMapping( ... )
-    public String editarJuegos(@RequestParam("id") int id, Model model){
-                /** Completar */
+        /** Completar */
+        model.addAttribute("listaJuegosDesc", juegosRepository.findAllByOrderByNombreDesc());
+        return "juegos/vista";
 
     }
 
-    @PostMapping( ... )
-    public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult ){
-                /** Completar */
-
+    @GetMapping("/nuevo")
+    public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego) {
+        /** Completar */
+        model.addAttribute("listaPlataformas",plataformasRepository.findAll());
+        return "juegos/editarFrm";
     }
 
-    @GetMapping("/juegos/borrar")
-    public String borrarDistribuidora(@RequestParam("id") int id){
+    @GetMapping("/editar")
+    public String editarJuegos(@ModelAttribute("juego") Juegos juegos,@RequestParam("id") int id, Model model) {
+        /** Completar */
+        Optional<Juegos> optionalJuegos = juegosRepository.findById(id);
+        if (optionalJuegos.isPresent()) {
+            model.addAttribute("listaPlataformas",plataformasRepository.findAll());
+            juegos = optionalJuegos.get();
+            model.addAttribute("juego", juegos);
+            return "juegos/editarFrm";
+        } else {
+            return "redirect:/juegos/lista";
+        }
+    }
+
+    @PostMapping("/guardar")
+    public String guardarJuegos(Model model, RedirectAttributes attr, @ModelAttribute("juego") @Valid Juegos juego, BindingResult bindingResult) {
+        /**
+         * Completar
+         */
+        Integer idJuego = juego.getIdjuego();
+        if (idJuego==null) {
+            attr.addFlashAttribute("msg", "Juego creado exitosamente");
+            juegosRepository.save(juego);
+            return "redirect:/juegos/lista";
+        } else {
+            juegosRepository.save(juego);
+            attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+            return "redirect:/juegos/lista";
+        }
+    }
+
+    @GetMapping("/borrar")
+    public String borrarDistribuidora(@RequestParam("id") int id) {
         Optional<Juegos> opt = juegosRepository.findById(id);
         if (opt.isPresent()) {
             juegosRepository.deleteById(id);
