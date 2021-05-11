@@ -1,5 +1,6 @@
 package edu.pucp.gtics.lab5_gtics_20211.controller;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import edu.pucp.gtics.lab5_gtics_20211.entity.Juegos;
 import edu.pucp.gtics.lab5_gtics_20211.entity.Plataformas;
 import edu.pucp.gtics.lab5_gtics_20211.entity.User;
@@ -16,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +33,29 @@ public class JuegosController {
     PlataformasRepository plataformasRepository;
 
     @GetMapping("/lista")
-    public String listaJuegos(Model model) {
-        /** Completar */
-        String rol = "admin";
-        if (rol.equalsIgnoreCase("user")) {
-            model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(1));
+    //RECIBIR EL ROL
+    public String listaJuegos(Model model, HttpSession httpSession) {
+
+        System.out.println("juegosLista");
+
+        User usuario = (User) httpSession.getAttribute("usuario");
+        String rol= usuario.getAutorizacion();
+        System.out.println(rol);
+
+        if (rol.equalsIgnoreCase("ADMIN")) {
+            System.out.println("ENTRO ADMIN");
+            model.addAttribute("listaJuegosAsc", juegosRepository.findAllByOrdOrderByPrecioAsc());
+            return "juegos/lista";
+
+        }else {
+            System.out.println("USER");
+
+            model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(usuario.getIdusuario()));
             return "juegos/comprado";
+
         }
-        model.addAttribute("listaJuegosAsc", juegosRepository.findAllByOrdOrderByPrecioAsc());
-        return "juegos/lista";
+
+
     }
 
     @GetMapping(value = {"", "/", "/vista"})
@@ -52,14 +68,15 @@ public class JuegosController {
     }
 
     @GetMapping("/nuevo")
-    public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego) {
+    public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego, HttpSession httpSession) {
         /** Completar */
         model.addAttribute("listaPlataformas",plataformasRepository.findAll());
         return "juegos/editarFrm";
     }
 
     @GetMapping("/editar")
-    public String editarJuegos(@ModelAttribute("juego") Juegos juegos,@RequestParam("id") int id, Model model) {
+    public String editarJuegos(@ModelAttribute("juego") Juegos juegos,@RequestParam("id") int id, Model model
+                                ) {
         /** Completar */
         Optional<Juegos> optionalJuegos = juegosRepository.findById(id);
         if (optionalJuegos.isPresent()) {

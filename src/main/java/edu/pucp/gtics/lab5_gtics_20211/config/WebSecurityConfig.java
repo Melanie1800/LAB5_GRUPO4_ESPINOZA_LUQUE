@@ -17,8 +17,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        /** Completar */
         http.formLogin()
                 .loginPage("/user/signIn")
                 .loginProcessingUrl("/processLogin")
@@ -26,15 +24,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("password")
                 .defaultSuccessUrl("/user/signInRedirect",true);
         http.authorizeRequests()
-                .antMatchers("/juegos/**").hasAnyAuthority("ADMIN")
-                .antMatchers("/juegos/**").hasAnyAuthority("USER")
-
+                .antMatchers("/juegos/nuevo","/juegos/lista","/juegos/**","/plataformas/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/juegos/lista","/juegos/**").hasAnyAuthority("USER")
                 .anyRequest().permitAll();
 
 
         http.logout()
+                .logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true);
+
         System.out.println("configure");
     }
 
@@ -44,12 +43,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        /** Completar */
+        System.out.println("configure 2");
         auth.jdbcAuthentication()
                 .dataSource(datasource)
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .usersByUsernameQuery("select correo, password, enabled FROM usuarios WHERE correo = ?")
-                .authoritiesByUsernameQuery("select u.correo, u.autorizacion from usuario u " +
+                .authoritiesByUsernameQuery("select u.correo, u.autorizacion from usuarios u " +
                         "where u.correo = ? and u.enabled = 1");
     }
 

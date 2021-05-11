@@ -28,16 +28,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="juego,info:${listaJuegosAsc}">
-                            <td th:text="${info.index + 1}"></td>
-                            <td><img th:src="${juego.image}" width="80" class="rounded" /></td>
-                            <td th:text="${juego.nombre}"></td>
-                            <td th:text="${juego.descripcion}"></td>
-                            <td th:text="${juego.plataforma.idplataforma}"></td>
-                            <td th:text="${juego.precio}"></td>
-                            <td><a class="btn btn-primary" th:href="@{'/juegos/editar'+'?id='+${juego.idjuego}}">Editar</a></td>
-                            <td><a class="btn btn-danger" th:href="@{'/juegos/borrar'+'?id='+${juego.idjuego}}">Borrar</a></td>
-                        </tr>
+                    <tr th:each="juego,info:${listaJuegosAsc}">
+                        <td th:text="${info.index + 1}"></td>
+                        <td><img th:src="${juego.image}" width="80" class="rounded" /></td>
+                        <td th:text="${juego.nombre}"></td>
+                        <td th:text="${juego.descripcion}"></td>
+                        <td th:text="${juego.plataforma.idplataforma}"></td>
+                        <td th:text="${juego.precio}"></td>
+                        <td><a class="btn btn-primary" th:href="@{'/juegos/editar'+'?id='+${juego.idjuego}}">Editar</a></td>
+                        <td><a class="btn btn-danger" th:href="@{'/juegos/borrar'+'?id='+${juego.idjuego}}">Borrar</a></td>
+                    </tr>
 
                     </tbody>
                 </table>
