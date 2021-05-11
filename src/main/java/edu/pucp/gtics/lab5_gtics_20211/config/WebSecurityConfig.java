@@ -24,9 +24,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/processLogin")
                 .usernameParameter("correo")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/redirectByRole",true);
+                .defaultSuccessUrl("/user/signInRedirect",true);
+        http.authorizeRequests()
+                .antMatchers("/juegos/**").hasAnyAuthority("ADMIN")
+                .antMatchers("/juegos/**").hasAnyAuthority("USER")
 
-        http.logout();
+                .anyRequest().permitAll();
+
+
+        http.logout()
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true);
+        System.out.println("configure");
     }
 
     @Autowired
