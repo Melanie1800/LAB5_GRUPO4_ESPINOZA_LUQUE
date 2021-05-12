@@ -39,7 +39,7 @@ public class JuegosController {
         System.out.println("juegosLista");
 
         User usuario = (User) httpSession.getAttribute("usuario");
-        String rol= usuario.getAutorizacion();
+        String rol = usuario.getAutorizacion();
         System.out.println(rol);
 
 
@@ -48,7 +48,7 @@ public class JuegosController {
             model.addAttribute("listaJuegosAsc", juegosRepository.findAllByOrdOrderByPrecioAsc());
             return "juegos/lista";
 
-        }else if(rol.equalsIgnoreCase("USER")){
+        } else if (rol.equalsIgnoreCase("USER")) {
             System.out.println("ENTRO USER");
             model.addAttribute("listaJuegosPorUser", juegosRepository.obtenerJuegosPorUser(usuario.getIdusuario()));
             return "juegos/comprado";
@@ -69,17 +69,17 @@ public class JuegosController {
     @GetMapping("/nuevo")
     public String nuevoJuegos(Model model, @ModelAttribute("juego") Juegos juego, HttpSession httpSession) {
         /** Completar */
-        model.addAttribute("listaPlataformas",plataformasRepository.findAll());
+        model.addAttribute("listaPlataformas", plataformasRepository.findAll());
         return "juegos/editarFrm";
     }
 
     @GetMapping("/editar")
-    public String editarJuegos(@ModelAttribute("juego") Juegos juegos,@RequestParam("id") int id, Model model
-                                ) {
+    public String editarJuegos(@ModelAttribute("juego") Juegos juegos, @RequestParam("id") int id, Model model
+    ) {
         /** Completar */
         Optional<Juegos> optionalJuegos = juegosRepository.findById(id);
         if (optionalJuegos.isPresent()) {
-            model.addAttribute("listaPlataformas",plataformasRepository.findAll());
+            model.addAttribute("listaPlataformas", plataformasRepository.findAll());
             juegos = optionalJuegos.get();
             model.addAttribute("juego", juegos);
             return "juegos/editarFrm";
@@ -93,15 +93,19 @@ public class JuegosController {
         /**
          * Completar
          */
-
-        if (juego.getIdjuego()==0) {
-            attr.addFlashAttribute("msg", "Juego creado exitosamente");
-            juegosRepository.save(juego);
-            return "redirect:/juegos/lista";
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("listaPlataformas", plataformasRepository.findAll());
+            return "juegos/editarFrm";
         } else {
-            juegosRepository.save(juego);
-            attr.addFlashAttribute("msg", "Juegoxitos actualizado eamente");
-            return "redirect:/juegos/lista";
+            if (juego.getIdjuego() == 0) {
+                attr.addFlashAttribute("msg", "Juego creado exitosamente");
+                juegosRepository.save(juego);
+                return "redirect:/juegos/lista";
+            } else {
+                juegosRepository.save(juego);
+                attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+                return "redirect:/juegos/lista";
+            }
         }
     }
 
