@@ -51,9 +51,9 @@
                         </div>
 
                     </div>
-                    <input type="hidden" id="idjuego" name="idjuego" value="2" />
-                    <a href="/gameshop3/juegos/lista" class="btn btn-danger">Cancelar</a>
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <input type="hidden" id="idjuego" name="idjuego" th:value="${juego.idjuego}" />
+                    <a th:href="@{juegos/lista}" class="btn btn-danger">Cancelar</a>
+                    <button type="submit" class="btn btn-primary" th:text="${juego.idjuego == 0 ? 'Registrar' : 'Actualizar'}"></button>
                 </form>
             </div>
         </main>
@@ -62,7 +62,7 @@
     <footer class="py-4 bg-light mt-auto">
         <div class="container-fluid">
             <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Colocar # Grupo - PUCP @ 2021</div>
+                <div class="text-muted">Colocar #4 Grupo - PUCP @ 2021</div>
             </div>
         </div>
     </footer>

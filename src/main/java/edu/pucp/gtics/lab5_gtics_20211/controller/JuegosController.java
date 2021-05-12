@@ -93,14 +93,14 @@ public class JuegosController {
         /**
          * Completar
          */
-        Integer idJuego = juego.getIdjuego();
-        if (idJuego==null) {
+
+        if (juego.getIdjuego()==0) {
             attr.addFlashAttribute("msg", "Juego creado exitosamente");
             juegosRepository.save(juego);
             return "redirect:/juegos/lista";
         } else {
             juegosRepository.save(juego);
-            attr.addFlashAttribute("msg", "Juego actualizado exitosamente");
+            attr.addFlashAttribute("msg", "Juegoxitos actualizado eamente");
             return "redirect:/juegos/lista";
         }
     }
